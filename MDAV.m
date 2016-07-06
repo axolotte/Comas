@@ -1,20 +1,55 @@
-function totalOrder = totalOrder()
+function [Clusters] = MDAV(Points, k)
 
-function Euclidic = euclidean(Points)
-
-
-Euclidic = Points;
-n = rows(Points);
-
-#for every point calculate euclidic distance to R
-#save distance into Euclidic, containing the point+distance
-for i=1:n
-  point = [Points(i,1) Points(i,2)];
-  distance =  norm(R, point);
-  Euclidic(i,3) = distance;
- end for
+debug_on_warning(1);
+debug_on_error(1);
+  
+  Euclidic = euclidean(Points);
+  [Sorted, IndexList] = sorting(Euclidic);
+  
+  #number of elemnts in Points
+  n= rows(Sorted);
+  #save clusters into a cell array
+  #Clusters = cell(:,:);
+  #running index, +k in the end of every iteration, as it indices the next k elements
+  i = 1;
+  #index for Clusters to save the cluster, counted up +1
+  x=1;
  
- #sort the point according to their distance to R
- function Sorted = sort(Euclidic)
- 
+  while n >=(2*k)
+  
+    kEntrys = IndexList(1:k,1);
+    
+    for j=1:k
+
+      C(j,:) = Points(kEntrys(j),:);
+     
+    endfor
+    
+    Euclidic = setdiff(Euclidic,C);
+    
+    IndexList = setdiff(IndexList, kEntrys);
+
+    Clusters{x}= C;
+    x++;
+    C=[];
+    n=n-k;
+  endwhile
+  
+ #if less than 2k elements are left, but them in one cluster
+    kEntrys = IndexList(1:end,1);
+     k = rows(kEntrys);
+    for j=1:k
+
+      C(j,:) = Points(kEntrys(j),:);
+     
+    endfor
+    
+  Clusters{x} =  C;
+  
+  draw_Clusters(Clusters);
+
+endfunction
+
+
+
  
