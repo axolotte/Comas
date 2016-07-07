@@ -1,3 +1,5 @@
+##color cluster in same color
+##so far 6 colours, more can be added
 function draw_Clusters(Clusters)
 debug_on_warning(1);
 debug_on_error(1);
@@ -7,12 +9,10 @@ debug_on_error(1);
 
 symbs = {'r', 'g','m','b','k','y'}; 
 
-#x = linspace(0,3*pi,200);
-#y = cos(x) + rand(1,200);
 
 figure(1)
 hold on
-axis ([0 100 0 80])
+axis ([0 100 0 100])
 
 for i=1:x
 

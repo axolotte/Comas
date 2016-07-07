@@ -1,3 +1,5 @@
+##draws Points (not clustered)
+##
 function draw_Plot(Points)
 debug_on_warning(1);
 debug_on_error(1);

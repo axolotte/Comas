@@ -1,6 +1,10 @@
 function [E] = euclidean(P)
+##calculates euclidean distance betwenn reference point R and input point P
+##so far R is (0,0), needs to be improved
+
 #calculates the eulidic distance from each point to the Reference point R
   n = rows(P);
+  #TO DO
   R = [0,0];
   E=0;
 #for every point calculate euclidic distance to R
