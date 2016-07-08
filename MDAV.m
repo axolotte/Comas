@@ -6,41 +6,41 @@ debug_on_warning(1);
 debug_on_error(1);
   
   Euclidic = euclidean(Points);
-  [Sorted, IndexList] = sorting(Euclidic);
+  [Sorted, IndexList] = sorting(Euclidic)
   
-  #number of elemnts in Points
+  
+  #number of elements in Points
   n= rows(Sorted);
-  #save clusters into a cell array
-  #Clusters = cell(:,:);
+ 
   #running index, +k in the end of every iteration, as it indices the next k elements
   i = 1;
   #index for Clusters to save the cluster, counted up +1
   x=1;
+  pointer=1;
  
   while n >=(2*k)
   
-    kEntrys = IndexList(1:k,1);
+    kEntrys = IndexList(pointer:pointer+k-1,1);
     
     for j=1:k
 
       C(j,:) = Points(kEntrys(j),:);
      
     endfor
-    
-    Euclidic = setdiff(Euclidic,C);
-    
-    IndexList = setdiff(IndexList, kEntrys);
+    pointer = pointer+k;
 
     Clusters{x}= C;
     x++;
     C=[];
-    n=n-k;
+    n=n-k
   endwhile
   
  #if less than 2k elements are left, but them in one cluster
-    kEntrys = IndexList(1:end,1);
-     k = rows(kEntrys);
-    for j=1:k
+     kEntrys = IndexList(pointer:end,1);
+     
+     f = rows(Points)-pointer+1
+     
+    for j=1:f
 
       C(j,:) = Points(kEntrys(j),:);
      

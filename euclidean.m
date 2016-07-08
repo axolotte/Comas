@@ -4,7 +4,7 @@ function [E] = euclidean(P)
 
 #calculates the eulidic distance from each point to the Reference point R
   n = rows(P);
-  #TO DO
+  
   R = [0,0];
   E=0;
 #for every point calculate euclidic distance to R

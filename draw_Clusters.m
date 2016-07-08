@@ -7,7 +7,7 @@ debug_on_error(1);
 
 [rows,x]=size(Clusters);
 
-symbs = {'r', 'g','m','b','k','y'}; 
+symbs = {'blue', 'green','magenta','yellow','k','y'}; 
 
 
 figure(1)
@@ -16,9 +16,9 @@ axis ([0 100 0 100])
 
 for i=1:x
 
-  C = Clusters{i}
-  x = C(1:end,1)
-  y= C(1:end, 2)
+  C = Clusters{i};
+  x = C(1:end,1);
+  y= C(1:end, 2);
   
   scatter(x',y',[],symbs{i});
   
