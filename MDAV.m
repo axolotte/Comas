@@ -6,7 +6,7 @@ debug_on_warning(1);
 debug_on_error(1);
   
   Euclidic = euclidean(Points);
-  [Sorted, IndexList] = sorting(Euclidic)
+  [Sorted, IndexList] = sorting(Euclidic);
   
   
   #number of elements in Points
@@ -32,13 +32,13 @@ debug_on_error(1);
     Clusters{x}= C;
     x++;
     C=[];
-    n=n-k
+    n=n-k;
   endwhile
   
  #if less than 2k elements are left, but them in one cluster
      kEntrys = IndexList(pointer:end,1);
      
-     f = rows(Points)-pointer+1
+     f = rows(Points)-pointer+1;
      
     for j=1:f
 
