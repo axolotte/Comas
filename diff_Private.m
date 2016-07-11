@@ -10,11 +10,10 @@ y=1;
     A=Average{i}
   
      for j=1:k
-       epsAge = ((eps*k)/200)*exp^((-abs(A(1,1))*eps*k)/100);
-       epsHours = ((eps*k)/160)*exp^((-abs(A(1,2))*eps*k)/80);
+ 
     
-       diffAge= A(1,1) + epsAge;
-       diffHours = A(1,2) + epsHours;
+       diffAge= A(1,1) + laplace_random(100, eps);
+       diffHours = A(1,2) + laplace_random(80, eps);
     
        diffDB(y,1)=diffAge;
        diffDB(y,2)=diffHours;
@@ -31,11 +30,10 @@ C= Clusters{rows};
 rest = size(C,1);
 
   for l=1:rest
-       epsAge = ((eps*k)/200)*exp((-abs(A(1,1))*eps*k)/100);
-       epsHours = ((eps*k)/160)*exp((-abs(A(1,2))*eps*k)/80);
+   
     
-       diffAge= A(1,1) + epsAge;
-       diffHours = A(1,2) + epsHours;
+       diffAge= A(1,1) + laplace_random(100, eps);
+       diffHours = A(1,2) + laplace_random(80, eps);
     
        diffDB(y,1)=diffAge;
        diffDB(y,2)=diffHours;
