@@ -3,7 +3,7 @@ debug_on_warning(1);
 debug_on_error(1);
 
 [rows,x]=size(Clusters);
-Clusters
+
 y=1;
 #iterate through Cluster until the last cluster
   for i=1:(x-1)
@@ -26,10 +26,10 @@ y=1;
   endfor
 
 [n,m]=size(Average);
-A=Average{n}
-C= Clusters{x}
+A=Average{n};
+C= Clusters{x};
 
-rest = size(C,1)
+rest = size(C,1);
 
   for l=1:rest
    
@@ -43,6 +43,6 @@ rest = size(C,1)
     
   endfor
 
-  [m,n] =size(diffDB)
+  
 
 endfunction

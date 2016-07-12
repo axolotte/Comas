@@ -7,7 +7,7 @@ debug_on_error(1);
 
 [rows,x]=size(Clusters);
 
-symbs = {'blue', 'green','magenta','yellow','k','y'}; 
+symbs = {'blue', 'green','magenta','black','red','brown'}; 
 
 
 figure(1)
