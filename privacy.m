@@ -1,4 +1,5 @@
 function [DB] = privacy(PT,k,eps)
+
 debug_on_warning(1);
 debug_on_error(1);
 
