@@ -7,7 +7,7 @@ debug_on_error(1);
 
 [rows,x]=size(Clusters);
 
-symbs = {'blue', 'green','magenta','black','red','brown'}; 
+#symbs = {'blue', 'green','magenta','black','red','cyan'}; 
 
 
 figure(1)
@@ -27,7 +27,7 @@ for i=1:x
        text(C(j,1),C(j,2),txt);
        hold on
      endfor
-  scatter(x',y',[],symbs{i});
+  scatter(x',y',[],mod(j,6));
   
   
   

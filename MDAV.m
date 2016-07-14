@@ -6,7 +6,7 @@ debug_on_warning(1);
 debug_on_error(1);
   
   Euclidic = euclidean(Points);
-  [Sorted, IndexList] = sorting(Euclidic);
+  [Sorted, IndexList] = sorting(Euclidic, Points);
   
   
   #number of elements in Points
@@ -24,12 +24,12 @@ debug_on_error(1);
     
     for j=1:k
 
-      C(j,:) = Points(kEntrys(j),:)
+      C(j,:) = Points(kEntrys(j),:);
      
     endfor
     pointer = pointer+k;
 
-    Clusters{x}= C
+    Clusters{x}= C;
     x++;
     C=[];
     n=n-k;
@@ -46,7 +46,7 @@ debug_on_error(1);
      
     endfor
     
-  Clusters{x} =  C
+  Clusters{x} =  C;
   
   draw_Clusters(Clusters);
   Average = calc_average(Clusters);
