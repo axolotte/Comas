@@ -1,4 +1,4 @@
-function [Clusters, Average] = MDAV(Points, k)
+function [Clusters, Average, IndexList] = microaggregation(Points, k)
 ##Micoraggregation algorithm, resembling MDAV
 ##makes clusters of k, using the euclidean distance
 
@@ -48,7 +48,7 @@ debug_on_error(1);
     
   Clusters{x} =  C;
   
-  draw_Clusters(Clusters);
+  #draw_Clusters(Clusters);
   Average = calc_average(Clusters);
 
 endfunction

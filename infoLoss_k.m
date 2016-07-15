@@ -1,4 +1,4 @@
-function infoLoss_k(Origin,Mask,Index)
+function [Sum]=infoLoss_k(Origin,Mask,Index)
 
 Sum = 0;
     rows = size(Origin,1);

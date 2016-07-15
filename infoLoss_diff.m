@@ -1,4 +1,4 @@
-function infoLoss_diff(Origin, Mask)
+function Sum = infoLoss_diff(Origin, Mask)
 
 
     Sum = 0;

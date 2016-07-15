@@ -1,4 +1,4 @@
-function only_diff(k, eps, file, column1, column2)
+function [diffDB, Points]=only_diff(eps, file, column1, column2)
 
 Points = input(column1,column2,file);
 
