@@ -1,4 +1,6 @@
 ##color cluster in same color
+## @param Clusters: cell array, containing the clusters as matrix,
+##                  works with two columns
 ##so far 6 colours, more can be added
 function draw_Clusters(Clusters)
 debug_on_warning(1);

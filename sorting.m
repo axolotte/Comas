@@ -1,5 +1,5 @@
  #sort tEhe point according to their distance to R
- #does not take into account points with same distance 
+
 function [Sorted, Index] = sorting(Euclidic, Points)
  
    [Sorted, Index] = sort(Euclidic);
