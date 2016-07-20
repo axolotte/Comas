@@ -15,21 +15,24 @@ debug_on_error(1);
   while sizeX >=(3*k)
     
     #get the average recored of X
-    averageX = calc_average(X);
+    averageX = average(X);
     
     #calculate from each point in X to averageX
     
-    distancesToX = euclidean(X,averageX);
+    distancesToX = euclidean(X,averageX)
     #get max. distant point to averageX
-    temp = max(distancesToX);
+    [x, index] = max(distancesToX);
+    temp = index;
     x1 = X(temp,:);
     
+      
     #calculate distances to x1
     distancesToX1 = euclidean(X,x1);
     
     #get max. distant point to x1
-    temp = max(distancesToX1);
-    x2 = X(temp,:);
+    [max2,temp2] = max(distancesToX1);
+    temp2 = index;
+    x2 = X(temp2,:);
     
     #sort the points in distancesToX1, so we can cluster the closest records to x1
     [sortedToX1,IndexX1] = sorting(distancesToX1, X);
@@ -43,11 +46,13 @@ debug_on_error(1);
      
      clusterContainer{end+1} = cluster;
     
-    #sort the points in distancesToX@, so we can cluster the closest records to x2
+    distancesToX2 = euclidean(X,x2)
+    #sort the points in distancesToX2, so we can cluster the closest records to x2
     [sortedToX2,IndexX2] = sorting(distancesToX2, X);
     #cluster the first k entrys and remove them from X
       for j=1:k
-        cluster (j, :)= [clusters;X(IndexX2(j),:)];
+        X(IndexX2(j),:)
+        cluster (j, :)= X(IndexX2(j),:);
         
         X(IndexX2(j),:) = [];
         IndexX2(j) = [];
@@ -59,14 +64,16 @@ debug_on_error(1);
    endwhile
    
    if sizeX >= 2*k
+ 
     #get the average recored of X
-    averageX = calc_average(X);
+    averageX = average(X);
     
     #calculate from each point in X to averageX
     
     distancesToX = euclidean(X,averageX);
     #get max. distant point to averageX
-    temp = max(distancesToX);
+    [max,index] = max(distancesToX);
+    temp = index;
     maxX = X(temp,:);
     
     #calculate distances to x1
@@ -84,17 +91,21 @@ debug_on_error(1);
    endif
    
    #cluster remaining records
-   
+   #TO DOOOOOOOOOO CHANGE i HERE FOR CLUSTERS!!!!!
    for i=1:numel(IndexX1)
         cluster(i,:) = X(i,:);
         X(i,:) = [];
     endfor
    clusterContainer{end+1} = cluster;
    
+   #calculate the average for the clusters
+   draw_Clusters(clusterContainer);
+   Average = average(clusterContainer);
+   
 endfunction
 
 #calculates the average record for dataset X
-function averageX = calc_average(X)
+function averageX = average(X)
 
   recordsX=size(X,1);
 
@@ -104,5 +115,5 @@ function averageX = calc_average(X)
     meanHours = mean(X(1:end, 2));
 
   endfor
-  averageX = [mean Age , meanHours];
+  averageX = [meanAge , meanHours];
 endfunction
