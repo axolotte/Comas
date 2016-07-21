@@ -2,7 +2,7 @@
 ## @param Clusters: cell array, containing the clusters as matrix,
 ##                  works with two columns
 ##so far 6 colours, more can be added
-function draw_Clusters(Clusters)
+function draw_Clusters(Clusters,R)
 debug_on_warning(1);
 debug_on_error(1);
 
@@ -24,7 +24,7 @@ for i=1:x
   
   r=size(C,1);
     for j=1:r
-       distance = euclidean(C(j,:));
+       distance = euclidean(C(j,:),R);
        txt = [' ' num2str(distance) ' '];
        text(C(j,1),C(j,2),txt);
        hold on

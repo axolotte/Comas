@@ -1,11 +1,11 @@
-function sensitive_MDAV(k, file, a, b)
+function [clusterContainer] = sensitive_MDAV(k, file, a, b)
 
 ##Micoraggregation algorithm MDAV
 ##makes clusters of k, using the euclidean distance
 
 debug_on_warning(1);
 debug_on_error(1);
-
+  
   X = input(a,b,file);
 
   #number of elements in X
@@ -19,7 +19,7 @@ debug_on_error(1);
     
     #calculate from each point in X to averageX
     
-    distancesToX = euclidean(X,averageX)
+    distancesToX = euclidean(X,averageX);
     #get max. distant point to averageX
     [x, index] = max(distancesToX);
     temp = index;
@@ -31,7 +31,7 @@ debug_on_error(1);
     
     #get max. distant point to x1
     [max2,temp2] = max(distancesToX1);
-    temp2 = index;
+    
     x2 = X(temp2,:);
     
     #sort the points in distancesToX1, so we can cluster the closest records to x1
@@ -39,26 +39,34 @@ debug_on_error(1);
     #cluster the first k entrys and remove them from X
      for i=1:k
         cluster(i,:)  =  X(IndexX1(i),:);
-        
-        X(IndexX1(i),:) = [];
-        IndexX1(i) = [];
+
      endfor
+     #remove elements from X
      
+        X(IndexX1(1:k),:) = [];
+  
+     
+     #add new cluster to clusterContainer
      clusterContainer{end+1} = cluster;
-    
-    distancesToX2 = euclidean(X,x2)
+     cluster = [];
+    #calculate distance to x2
+    distancesToX2 = euclidean(X,x2);
     #sort the points in distancesToX2, so we can cluster the closest records to x2
     [sortedToX2,IndexX2] = sorting(distancesToX2, X);
     #cluster the first k entrys and remove them from X
       for j=1:k
-        X(IndexX2(j),:)
+        X(IndexX2(j),:);
         cluster (j, :)= X(IndexX2(j),:);
         
-        X(IndexX2(j),:) = [];
-        IndexX2(j) = [];
       endfor
       
+      #remove elements from X
+     
+        X(IndexX2(1:k),:)= [];
+     
+      
       clusterContainer{end+1} = cluster;
+      cluster = [];
       
    sizeX = size (X,1);
    endwhile
@@ -76,31 +84,40 @@ debug_on_error(1);
     temp = index;
     maxX = X(temp,:);
     
-    #calculate distances to x1
+    #calculate distances to maxX
     distancesToMaxX = euclidean(X,maxX);
     
-     #sort the points in distancesToX1, so we can cluster the closest records to x1
+     #sort the points in distancesToMaxX, so we can cluster the closest records to maxX
     [sortedToMaxX,IndexMaxX] = sorting(distancesToMaxX, X);
     #cluster the first k entrys and remove them from X
     for i=1:k
         cluster(i,:) = X(IndexMaxX(i),:);
-        X(IndexMaxX(i),:) = [];
-        IndexMaxX(i) = [];
     endfor
+    
+    #remove elements from X
+     
+     X(IndexMaxX(1:k),:) = [];
+  
+     
      clusterContainer{end+1} = cluster;
+     cluster = [];
    endif
    
    #cluster remaining records
-   #TO DOOOOOOOOOO CHANGE i HERE FOR CLUSTERS!!!!!
-   for i=1:numel(IndexX1)
+   endX = size(X,1);
+   
+   for i=1:endX  
+     
         cluster(i,:) = X(i,:);
-        X(i,:) = [];
+       
+       
     endfor
    clusterContainer{end+1} = cluster;
    
    #calculate the average for the clusters
-   draw_Clusters(clusterContainer);
-   Average = average(clusterContainer);
+   R=[0 0];
+   drawCluster(clusterContainer);
+   Average = calc_average(clusterContainer);
    
 endfunction
 
@@ -108,6 +125,7 @@ endfunction
 function averageX = average(X)
 
   recordsX=size(X,1);
+  
 
   for i=1:recordsX
     
@@ -116,4 +134,29 @@ function averageX = average(X)
 
   endfor
   averageX = [meanAge , meanHours];
+endfunction
+
+function drawCluster(Clusters)
+  
+  x = size(Clusters,2);
+
+  #symbs = {'blue', 'green','magenta','black','red','cyan'}; 
+
+
+    figure(1)
+     hold on
+    axis ([0 100 0 100]);
+
+  for i=1:x
+
+    C = Clusters{i};
+    x = C(:,1);
+    y= C(:, 2);
+    
+    scatter(x',y',[],mod(i,6));
+    
+  
+  
+endfor
+
 endfunction

@@ -1,4 +1,4 @@
- #sort tEhe point according to their distance to R
+ #sort the point according to their distance to R
 
 function [Sorted, Index] = sorting(Euclidic, Points)
  
