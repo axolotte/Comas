@@ -1,10 +1,17 @@
-function [clusterContainer] = sensitive_MDAV(k, file, a, b)
-
 ##Micoraggregation algorithm MDAV
 ##makes clusters of k, using the euclidean distance
+##@param k: cluster size k
+##@param file: filename
+##@param a,b: columns containing the relevant attributes
+function [clusterContainer, Average] = sensitive_MDAV(k, file, a, b)
+
 
 debug_on_warning(1);
 debug_on_error(1);
+
+#Matrix to store the average points of each cluster to draw them later
+
+averagePoints = [];
   
   X = input(a,b,file);
 
@@ -24,6 +31,7 @@ debug_on_error(1);
     [x, index] = max(distancesToX);
     temp = index;
     x1 = X(temp,:);
+    averagePoints = [averagePoints ;x1];
     
       
     #calculate distances to x1
@@ -33,12 +41,14 @@ debug_on_error(1);
     [max2,temp2] = max(distancesToX1);
     
     x2 = X(temp2,:);
+    averagePoints = [averagePoints;x2];
     
     #sort the points in distancesToX1, so we can cluster the closest records to x1
     [sortedToX1,IndexX1] = sorting(distancesToX1, X);
     #cluster the first k entrys and remove them from X
      for i=1:k
-        cluster(i,:)  =  X(IndexX1(i),:);
+        cluster(i,1:2)  =  X(IndexX1(i),:);\
+        cluster(i,3) = Index
 
      endfor
      #remove elements from X
@@ -83,6 +93,7 @@ debug_on_error(1);
     [max,index] = max(distancesToX);
     temp = index;
     maxX = X(temp,:);
+    averagePoints = [averagePoints; maxX];
     
     #calculate distances to maxX
     distancesToMaxX = euclidean(X,maxX);
@@ -116,7 +127,8 @@ debug_on_error(1);
    
    #calculate the average for the clusters
    R=[0 0];
-   drawCluster(clusterContainer);
+   averagePoints
+   drawCluster(clusterContainer, averagePoints);
    Average = calc_average(clusterContainer);
    
 endfunction
@@ -136,7 +148,7 @@ function averageX = average(X)
   averageX = [meanAge , meanHours];
 endfunction
 
-function drawCluster(Clusters)
+function drawCluster(Clusters, averagePoints)
   
   x = size(Clusters,2);
 
@@ -153,6 +165,10 @@ function drawCluster(Clusters)
     x = C(:,1);
     y= C(:, 2);
     
+    if i<=size(averagePoints,1)
+      txt = [' ' num2str(averagePoints(i,:)) ' '];
+      text(averagePoints(i,1),averagePoints(i,2),txt);
+    endif
     scatter(x',y',[],mod(i,6));
     
   

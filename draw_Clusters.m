@@ -29,7 +29,7 @@ for i=1:x
        text(C(j,1),C(j,2),txt);
        hold on
      endfor
-  scatter(x',y',[],mod(j,6));
+  scatter(x',y',[],mod(i,6));
   
   
   

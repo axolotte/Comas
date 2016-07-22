@@ -1,11 +1,20 @@
-function [DB,PT,Indexlist,C] = MicroDiff(k,eps, file, column1, column2)
+##microaggregates first and then mask the values with differential privacy
+##@param k: clustersize
+##@param eps: epsilon
+##@param file: filename
+##@param column1,column2: attribute columns
+##returns DB: masked Database
+##PT: the original table
+##IndexList: list of the indices in the sorted order 
+##Clusters: cell array containing the Clusters
+function [DB,PT,Indexlist,Clusters] = MicroDiff(k,eps, file, column1, column2)
 
 debug_on_warning(1);
 debug_on_error(1);
 
   PT = input(column1, column2, file);
   [C,A,Indexlist] = microaggregation(PT,k);
-  #draw_Clusters(Clusters);
+ 
   
   DB= diff_Private(C,A,k,eps);
 endfunction
@@ -59,7 +68,7 @@ function [Clusters, Average, IndexList] = microaggregation(Points, k)
     
   Clusters{x} =  C;
   
-  #draw_Clusters(Clusters);
+  draw_Clusters(Clusters,R);
   Average = calc_average(Clusters);
 
 endfunction
