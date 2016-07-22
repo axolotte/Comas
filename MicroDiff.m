@@ -13,10 +13,10 @@ debug_on_warning(1);
 debug_on_error(1);
 
   PT = input(column1, column2, file);
-  [C,A,Indexlist] = microaggregation(PT,k);
+  [Clusters,A,Indexlist] = microaggregation(PT,k);
  
   
-  DB= diff_Private(C,A,k,eps);
+  DB= diff_Private(Clusters,A,k,eps);
 endfunction
 
 ##Micoraggregation algorithm, resembling MDAV

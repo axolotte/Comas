@@ -3,7 +3,7 @@
 ##@param k: cluster size k
 ##@param file: filename
 ##@param a,b: columns containing the relevant attributes
-function [clusterContainer, Average] = sensitive_MDAV(k, file, a, b)
+function [clusterContainer, Masked, originalValues, Average] = sensitive_MDAV(k, file, a, b,X)
 
 
 debug_on_warning(1);
@@ -11,13 +11,17 @@ debug_on_error(1);
 
 #Matrix to store the average points of each cluster to draw them later
 
-averagePoints = [];
+  averagePoints = [];
   
-  X = input(a,b,file);
+  #check if dataset is already given (X) or has to be read from file
+  if nargin = 4
+    X = input(a,b,file);
+  endif
 
   #number of elements in X
   sizeX = size (X,1);
   clusterContainer = {};
+  originalValues = [];
  
   while sizeX >=(3*k)
     
@@ -43,12 +47,14 @@ averagePoints = [];
     x2 = X(temp2,:);
     averagePoints = [averagePoints;x2];
     
+    
     #sort the points in distancesToX1, so we can cluster the closest records to x1
     [sortedToX1,IndexX1] = sorting(distancesToX1, X);
     #cluster the first k entrys and remove them from X
      for i=1:k
-        cluster(i,1:2)  =  X(IndexX1(i),:);\
-        cluster(i,3) = Index
+        X(IndexX1(i),:)
+        cluster(i,1:2)  =  X(IndexX1(i),:)
+        originalValues = [originalValues ; X(IndexX1(i),:)]
 
      endfor
      #remove elements from X
@@ -67,6 +73,7 @@ averagePoints = [];
       for j=1:k
         X(IndexX2(j),:);
         cluster (j, :)= X(IndexX2(j),:);
+        originalValues = [originalValues ; X(IndexX2(j),:)];
         
       endfor
       
@@ -103,6 +110,7 @@ averagePoints = [];
     #cluster the first k entrys and remove them from X
     for i=1:k
         cluster(i,:) = X(IndexMaxX(i),:);
+        originalValues = [originalValues ; X(IndexMaxX(i),:)];
     endfor
     
     #remove elements from X
@@ -120,6 +128,7 @@ averagePoints = [];
    for i=1:endX  
      
         cluster(i,:) = X(i,:);
+        originalValues = [originalValues ; X(i,:)];
        
        
     endfor
@@ -127,9 +136,20 @@ averagePoints = [];
    
    #calculate the average for the clusters
    R=[0 0];
-   averagePoints
+   
    drawCluster(clusterContainer, averagePoints);
    Average = calc_average(clusterContainer);
+   
+   #created masked list
+   Masked = [];
+   n = size(clusterContainer,2);
+   for i=1:n
+    C = clusterContainer{i};
+    m = size(C,1);
+    for j=1:m
+      Masked = [Masked; Average(i,:)];
+    endfor
+   endfor
    
 endfunction
 

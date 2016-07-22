@@ -5,12 +5,12 @@ function [Average]=calc_average(Clusters)
   #average values can be matched
   
   [x,y]=size(Clusters);
-  
+  Average = [];
   for i=1:y
     C=Clusters{i};
     meanAge = mean(C(1:end,1));
     meanHours = mean(C(1:end, 2));
-    Average{i} = [meanAge,meanHours];
+    Average = [Average;[meanAge,meanHours]];
   
   endfor
 
