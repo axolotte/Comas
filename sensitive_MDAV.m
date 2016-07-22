@@ -13,10 +13,8 @@ debug_on_error(1);
 
   averagePoints = [];
   
-  #check if dataset is already given (X) or has to be read from file
-  if nargin = 4
+  
     X = input(a,b,file);
-  endif
 
   #number of elements in X
   sizeX = size (X,1);
