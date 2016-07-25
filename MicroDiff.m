@@ -68,7 +68,7 @@ function [Clusters, Average, IndexList] = microaggregation(Points, k)
     
   Clusters{x} =  C;
   
-  draw_Clusters(Clusters,R);
+  #draw_Clusters(Clusters,R);
   Average = calc_average(Clusters);
 
 endfunction
@@ -83,7 +83,7 @@ function [diffDB] = diff_Private(Clusters, Average, k, eps)
   #iterate through Cluster until the last cluster
     for i=1:(x-1)
 
-      A=Average{i};
+      A=Average(i,:);
     
        for j=1:k
    
@@ -101,7 +101,7 @@ function [diffDB] = diff_Private(Clusters, Average, k, eps)
     endfor
 
   [n,m]=size(Average);
-  A=Average{n};
+  A=Average(n,:);
   C= Clusters{x};
 
   rest = size(C,1);

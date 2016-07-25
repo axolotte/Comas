@@ -50,9 +50,9 @@ debug_on_error(1);
     [sortedToX1,IndexX1] = sorting(distancesToX1, X);
     #cluster the first k entrys and remove them from X
      for i=1:k
-        X(IndexX1(i),:)
-        cluster(i,1:2)  =  X(IndexX1(i),:)
-        originalValues = [originalValues ; X(IndexX1(i),:)]
+        X(IndexX1(i),:);
+        cluster(i,1:2)  =  X(IndexX1(i),:);
+        originalValues = [originalValues ; X(IndexX1(i),:)];
 
      endfor
      #remove elements from X
@@ -135,7 +135,7 @@ debug_on_error(1);
    #calculate the average for the clusters
    R=[0 0];
    
-   drawCluster(clusterContainer, averagePoints);
+   #drawCluster(clusterContainer, averagePoints);
    Average = calc_average(clusterContainer);
    
    #created masked list

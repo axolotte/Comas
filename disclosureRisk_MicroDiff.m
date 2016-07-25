@@ -14,12 +14,13 @@ endfunction
 
 function pr = recordLinkProb(x,i,Origin, IndexList)
   distancesToX = euclidean(Origin, x);
-  minDis = min(distancesToX);
+  [minDis, indexMin] = min(distancesToX);
   G = size(minDis,1);
   originalValueX = Origin(IndexList(i),:);
+  minOriginValues = Origin(indexMin,:);
   
-  if ismember(originalValueX , minDis)
+  if ismember(originalValueX , minOriginValues)
     pr = 1/G;
-  else  pr = 0
+  else  pr = 0;
   endif 
 endfunction

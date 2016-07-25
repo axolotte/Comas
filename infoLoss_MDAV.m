@@ -13,9 +13,10 @@ function  Sum = infoLoss_MDAV(clusterContainer, Average)
       originCluster = clusterContainer{i};
       k = size(originCluster,1);
       for j=1:k
-        dist1 = sqrt((originCluster(i,1)-Average(i,1))*(originCluster(i,1)-Average(i,1)));
-        dist2 = sqrt((originCluster(i,2)-Average(i,2)*(originCluster(i,2)-Average(i,2)));
+        dist1 = sqrt((originCluster(j,1)-Average(i,1))*(originCluster(j,1)-Average(i,1)));
+        dist2 = sqrt((originCluster(j,2)-Average(i,2))*(originCluster(j,2)-Average(i,2)));
       Sum= Sum+dist1+dist2;
+    endfor
     endfor
     
 endfunction
