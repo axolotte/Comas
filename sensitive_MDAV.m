@@ -3,7 +3,7 @@
 ##@param k: cluster size k
 ##@param file: filename
 ##@param a,b: columns containing the relevant attributes
-function [clusterContainer, Masked, originalValues, Average] = sensitive_MDAV(k, file, a, b,X)
+function [clusterContainer, Masked, originalValues, Average] = sensitive_MDAV(k, file, a, b)
 
 
 debug_on_warning(1);

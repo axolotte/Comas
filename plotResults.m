@@ -13,6 +13,6 @@ RLDiff = temp(:,3)
 figure(1)
 hold on
 
-plot(epsDiff,SSEDiff, epsDiff, RLDiff);
+semilogy(epsDiff,SSEDiff, epsDiff, RLDiff);
 
 endfunction
