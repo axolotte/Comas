@@ -24,9 +24,9 @@ endfor
   save ("-ascii", output ,"evalDiff");
   
 %}
-  
+ %{ 
 #run evaluation for MDAV, for k from 2 to 100
-evalMDAV = [k InfoLoss RL];
+evalMDAV = ["k" "InfoLoss" "RL"];
 output = ['evalMDAV' num2str(file) num2str(runNumber) '.txt'];
 for k=2:100
 
@@ -41,10 +41,10 @@ for k=2:100
 endfor
 
 
-
+%}
 
 #evaluation for Microaggreagation+Differential Privacy
-evalMicroDiff = [k eps InfoLoss RL ScoreDiff ScoreMDAV];
+evalMicroDiff = [];
  output = ['evalMicroDiff' num2str(file) num2str(runNumber) '.txt'];
 eps = {0.01,0.1,1,10};
 for i=1:4
@@ -54,6 +54,7 @@ for i=1:4
     infoLoss = infoLoss_diff(Origin, Masked, IndexList);
     rl = disclosureRisk_diffPrivacy(Origin, Masked, IndexList);
     
+    %{
     sseScoreDiff = sqrt(infoLossDiff)/sqrt(infoLoss);
     rlScoreDiff = rlDiff/rl;
     finalScoreDiff = sseScoreDiff/rlScoreDiff;
@@ -61,8 +62,9 @@ for i=1:4
     sseScoreMDAV = sqrt(infoLossMDAV)/sqrt(infoLoss);
     rlScoreMDAV = rlMDAV/rl;
     finalScoreMDAV = sseScoreMDAV/rlScoreMDAV;
+    %}
     
-    evalMicroDiff = [evalMicroDiff ; [k, eps{i},infoLoss,rl, finalScoreDiff,finalScoreMDAV]];
+    evalMicroDiff = [evalMicroDiff ; [k, eps{i},infoLoss,rl]];
 
     save ("-ascii", output, "evalMicroDiff");
   endfor
