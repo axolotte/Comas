@@ -68,7 +68,7 @@ function [Clusters, Average, IndexList] = microaggregation(Points, k)
     
   Clusters{x} =  C;
   
-  #draw_Clusters(Clusters,R);
+  draw_Clusters(Clusters,R);
   Average = calc_average(Clusters);
 
 endfunction

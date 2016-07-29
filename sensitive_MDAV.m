@@ -135,7 +135,7 @@ debug_on_error(1);
    #calculate the average for the clusters
    R=[0 0];
    
-   #drawCluster(clusterContainer, averagePoints);
+   drawCluster(clusterContainer, averagePoints);
    Average = calc_average(clusterContainer);
    
    #created masked list

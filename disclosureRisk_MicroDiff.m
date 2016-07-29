@@ -1,3 +1,9 @@
+#{Disclosure Risk for MicroDiff
+@param Origin: Original Dataset
+@param Masked: Masked (Clustered and Noise added) dataset
+@param IndexList: Contains indices of the values in the masked list, so that we can conclude
+the original values
+#}
 function rl = disclosureRisk_MicroDiff(Origin, Masked, IndexList)
 
 n = size(Origin,1);
@@ -11,7 +17,8 @@ endfor
 
 rl = 100*sum/n;
 endfunction
-
+#{Calculates the Record Linkage Probability
+#}
 function pr = recordLinkProb(x,i,Origin, IndexList)
   distancesToX = euclidean(Origin, x);
   [minDis, indexMin] = min(distancesToX);

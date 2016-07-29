@@ -1,3 +1,8 @@
+#{
+Calculates Laplace noise which is added to mask the data.
+@param f:sensitivity of the data
+@param eps: parameter eps, determining the strenght of privacy
+#}
 function [noise] = laplace_random(f, eps)
 
 

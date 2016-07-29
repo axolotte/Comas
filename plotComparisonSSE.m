@@ -1,3 +1,7 @@
+#{
+Function to compare graphically Diff to MicroDiff in terms of SSE 
+#@param file1,2: filenames where file1 is MDAV/Diff and file2 is MicroDiff
+#}
 function plotComparisonSSE(file1, file2)
 
 filename = [file1 ".txt"];
@@ -27,7 +31,7 @@ SSEDiff4 (1:99,1)= temp1(4,2);
 
 figure(1)
 hold on
-
+title('SSE');
 plot(k,sseMicroDiff1, k, sseMicroDiff2, k, sseMicroDiff3, k, sseMicroDiff4, k, SSEDiff1, k , SSEDiff2, k, SSEDiff3, k, SSEDiff4);
 legend({'eps=0.01','eps=0.1','eps=1','eps=10','eps=0.01', 'eps=0.1','eps=1','eps=10'});
 endfunction

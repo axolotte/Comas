@@ -1,4 +1,6 @@
 #takes a,b as input, which specify which columns of the table should be used
+#@param file: name of the input file
+#outputs Matrix containing the points/values from the dataset
 function Points = input(a,b,file)
 debug_on_warning(1);
 debug_on_error(1);

@@ -1,5 +1,5 @@
-#information loss metric for MicroAgg algorithm
-#needs to get the Indexlist to calculate informationloss
+#Information loss metric for MicroDiff algorithm
+#needs to get the Indexlist to calculate information loss
 function [Sum]=infoLoss_k(Origin,Mask,Index)
 
 Sum = 0;
