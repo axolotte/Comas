@@ -16,10 +16,10 @@ y=1;
   
      
  
-       rnd_Age = laplace_random(100, eps);
+       rnd_Age = laplace_random(65, eps);
        
        diffAge= Points(i,1) + rnd_Age;
-       diffHours = Points(i,2) + laplace_random(80, eps);
+       diffHours = Points(i,2) + laplace_random(70, eps);
     
        diffDB(y,1)=diffAge;
        diffDB(y,2)=diffHours;

@@ -14,7 +14,7 @@ debug_on_error(1);
 
 figure(1)
 hold on
-axis ([0 100 0 100]);
+axis ([0 100 0 60]);
 
 for i=1:x
 

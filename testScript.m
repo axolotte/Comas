@@ -26,7 +26,7 @@ endfor
   
   
 
- 
+
 #run evaluation for MDAV, for k from 2 to 100
 evalMDAV = [];
 output = ['evalMDAV' num2str(file) num2str(runNumber) '.txt'];
@@ -71,7 +71,7 @@ for i=1:4
     save ("-ascii", output, "evalMicroDiff");
   endfor
 endfor
-   
+  
   
 endfunction
 

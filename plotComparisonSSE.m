@@ -32,6 +32,9 @@ SSEDiff4 (1:99,1)= temp1(4,2);
 figure(1)
 hold on
 title('SSE');
-plot(k,sseMicroDiff1, k, sseMicroDiff2, k, sseMicroDiff3, k, sseMicroDiff4, k, SSEDiff1, k , SSEDiff2, k, SSEDiff3, k, SSEDiff4);
-legend({'eps=0.01','eps=0.1','eps=1','eps=10','eps=0.01', 'eps=0.1','eps=1','eps=10'});
+xlabel('k');
+plot(k,sseMicroDiff1,'b --', k, sseMicroDiff2,'r:',
+       k, sseMicroDiff3,'g-.', k, sseMicroDiff4, 'm-', k, SSEDiff1,'b--', k , 
+       SSEDiff2,'r:', k, SSEDiff3, 'g-.',k, SSEDiff4,'m-');
+legend({'eps=0.01','eps=0.1','eps=1','eps=10'});
 endfunction

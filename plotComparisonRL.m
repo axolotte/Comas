@@ -32,6 +32,9 @@ rlDiff4 (1:99,1)= temp1(4,3);
 figure(1)
 hold on
 title('RL');
-plot(k,rlMicroDiff1, k, rlMicroDiff2, k, rlMicroDiff3, k, rlMicroDiff4, k, rlDiff1, k , rlDiff2, k, rlDiff3, k, rlDiff4);
-legend({'eps=0.01','eps=0.1','eps=1','eps=10','eps=0.01', 'eps=0.1','eps=1','eps=10'});
+plot(k,rlMicroDiff1,'k --', k, rlMicroDiff2,'r:',
+       k, rlMicroDiff3,'g-.', k, rlMicroDiff4, 'm-', k, rlDiff1,'k--', k , 
+       rlDiff2,'r:', k, rlDiff3, 'g-.',k, rlDiff4,'m-');
+legend({'eps=0.01','eps=0.1','eps=1','eps=10'});
+ 
 endfunction

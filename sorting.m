@@ -6,8 +6,8 @@ function [Sorted, Index] = sorting(Euclidic, Points)
    
    newMatrix = [Sorted Index];
    
-   temp = sortrows(newMatrix)
+   temp = sortrows(newMatrix);
    
    Sorted = temp(:,1);
-   Index = temp(:,2);s
+   Index = temp(:,2);
 endfunction
