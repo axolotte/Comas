@@ -50,7 +50,6 @@ debug_on_error(1);
     [sortedToX1,IndexX1] = sorting(distancesToX1, X);
     #cluster the first k entrys and remove them from X
      for i=1:k
-        X(IndexX1(i),:);
         cluster(i,1:2)  =  X(IndexX1(i),:);
         originalValues = [originalValues ; X(IndexX1(i),:)];
 

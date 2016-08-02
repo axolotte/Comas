@@ -9,7 +9,7 @@ function testScript(file,c1,c2, runNumber)
 debug_on_warning(1);
 debug_on_error(1);
 
-
+%{
 #evaluation for e-differntial privacy for epsilon ={0.01,0.1,1,10}
 evalDiff = [];
 output = ['evalDiff' num2str(file) num2str(runNumber) '.txt'];
@@ -43,7 +43,7 @@ for k=2:100
 endfor
 
 
-
+%}
 
 #evaluation for Microaggreagation+Differential Privacy
 evalMicroDiff = [];
@@ -52,20 +52,11 @@ eps = {0.01,0.1,1,10};
 for i=1:4
     #change k depending on dataset, bigger for bigger datasets
   for k=2:100
-    [Masked,Origin,IndexList,Clusters] = MicroDiff(k,eps{i}, file, c1, c2);
-    infoLoss = infoLoss_k(Origin, Masked, IndexList);
-    rl = disclosureRisk_MicroDiff(Origin, Masked, IndexList);
-    %{
-   {
-    sseScoreDiff = sqrt(infoLossDiff)/sqrt(infoLoss);
-    rlScoreDiff = rlDiff/rl;
-    finalScoreDiff = sseScoreDiff/rlScoreDiff;
-    
-    sseScoreMDAV = sqrt(infoLossMDAV)/sqrt(infoLoss);
-    rlScoreMDAV = rlMDAV/rl;
-    finalScoreMDAV = sseScoreMDAV/rlScoreMDAV;
-    }
-    %}
+    [Masked,OriginValues,Clusters,Average] = MicroDiff(k,eps{i}, file, c1, c2);
+    #infoLoss = infoLoss_k(Origin, Masked, IndexList);
+    #rl = disclosureRisk_MicroDiff(Origin, Masked, IndexList);
+    infoLoss = infoLoss_MDAV(Clusters,Average);
+    rl = disclosureRisk_MDAV(OriginValues, Masked)
     evalMicroDiff = [evalMicroDiff ; [k, eps{i},infoLoss,rl]];
 
     save ("-ascii", output, "evalMicroDiff");

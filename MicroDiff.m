@@ -7,16 +7,16 @@
 ##PT: the original table
 ##IndexList: list of the indices in the sorted order 
 ##Clusters: cell array containing the Clusters
-function [DB,PT,Indexlist,Clusters] = MicroDiff(k,eps, file, column1, column2)
+function [Masked,OriginValues,Clusters,Average] = MicroDiff(k,eps, file, column1, column2)
 
 debug_on_warning(1);
 debug_on_error(1);
 
-  PT = input(column1, column2, file);
-  [Clusters,A,Indexlist] = microaggregation(PT,k);
+  Points = input(column1, column2, file);
+  [Clusters,Average,OriginValues] = generalMicroAgg(Points,k);
  
   
-  DB= diff_Private(Clusters,A,k,eps);
+  Masked= diff_Private(Clusters,Average,k,eps);
 endfunction
 
 ##Micoraggregation algorithm, resembling MDAV
@@ -119,4 +119,89 @@ function [diffDB] = diff_Private(Clusters, Average, k, eps)
     endfor
 endfunction
 
+function [clusterContainer, Average, originalValues] = generalMicroAgg(Points, k)
 
+R1 = [ 0 0];
+R2 = [100 80];
+R3 = [100 0];
+R4=[0 80];
+originalValues = [];
+clusterContainer = {};
+
+while size(Points,1)>=2*k
+#---cluster for reference Point 1-----
+
+  if size(Points,1)>=2*k
+    
+      eucl = euclidean(Points,R1);
+      [Sorted, Index] = sorting (eucl, Points);
+      
+      for i=1:k
+        cluster(i,1:2) = Points(Index(i),:);
+        originalValues = [originalValues ; Points(Index(i),:)];
+      endfor
+      Points(Index(1:k),:) = [];
+      clusterContainer{end+1} = cluster;
+      cluster = [];
+  endif
+#-----cluster around R2  
+ 
+  if size(Points,1)>=2*k
+    
+      eucl = euclidean(Points,R2);
+      [Sorted, Index] = sorting (eucl, Points);
+      
+      for i=1:k
+        cluster(i,1:2) = Points(Index(i),:);
+        originalValues = [originalValues ; Points(Index(i),:)];
+      endfor
+      Points(Index(1:k),:) = [];
+      clusterContainer{end+1} = cluster;
+      cluster = [];
+  endif
+ #-----cluster around R3 
+ 
+ if size(Points,1)>=2*k
+    
+      eucl = euclidean(Points,R3);
+      [Sorted, Index] = sorting (eucl, Points);
+      
+      for i=1:k
+        cluster(i,1:2) = Points(Index(i),:);
+        originalValues = [originalValues ; Points(Index(i),:)];
+      endfor
+      Points(Index(1:k),:) = [];
+      clusterContainer{end+1} = cluster;
+      cluster = [];
+  endif
+  
+ #-----cluster around R4
+ if size(Points,1)>=2*k
+    
+      eucl = euclidean(Points,R4);
+      [Sorted, Index] = sorting (eucl, Points);
+      
+      for i=1:k
+        cluster(i,1:2) = Points(Index(i),:);
+        originalValues = [originalValues ; Points(Index(i),:)];
+      endfor
+      Points(Index(1:k),:) = [];
+      clusterContainer{end+1} = cluster;
+      cluster = [];
+  endif
+
+endwhile
+
+
+
+#----cluster remaining points
+s = size(Points,1);
+for i=1:s
+ cluster(i,1:2) = Points(i,:);
+originalValues = [originalValues ; Points(i,:)];
+endfor
+clusterContainer{end+1} = cluster;
+
+Average = calc_average(clusterContainer);
+
+endfunction
